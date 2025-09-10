@@ -1,0 +1,52 @@
+{
+  "name": "pcb-thermal-toolkit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "concurrently -k \"npx vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "build:web": "vite build",
+    "build:electron": "electron-builder --win nsis",
+    "dist": "npm run build:web && npm run build:electron"
+  },
+  "build": {
+    "appId": "com.yourcompany.pcbthermaltoolkit",
+    "productName": "PCB Thermal Toolkit",
+    "files": [
+      "dist/**",
+      "electron/**",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "build"
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "PCB Thermal Toolkit"
+    }
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "concurrently": "^9.2.1",
+    "electron": "^38.0.0",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.5.6",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "wait-on": "^8.0.4"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}
